@@ -357,6 +357,50 @@
           orgId: orgId,
           num: number
       }
+***
+
+#### 左外联结
+> 多表关联后再左外关联
+
+    FOR g IN organization   
+    FOR c IN catalog     
+    FOR r IN resource     
+    FILTER c.status == 1 and g._key == c.orgId and c._key == r.gcId   
+    and r.resourceType IN [  1 ,  2 ,  3 ,  4  ]  
+    and c.orgId == "5894726"  
+    SORT r.updateTime desc, g.name, r.resourceTitle  
+
+    let cUsers = (    FOR u IN user    FILTER u.status == 1 and u._key == r.createUId      RETURN u    )  
+    FOR cUser IN (     LENGTH(cUsers) > 0 ? cUsers :        [ { } ]   )
+
+    let uUsers = (    FOR u IN user    FILTER u.status == 1 and u._key == r.updateUserId      RETURN u    )  
+    FOR uUser IN (     LENGTH(uUsers) > 0 ? uUsers :        [ { } ]   )
+
+    LIMIT 0, 20  
+    RETURN {"orgName": g.name, "surname": c.surname, "genealogyName": c.genealogyName,   
+      "createName": cUser.name,
+      "updateName": uUser.name
+    }
+
+#### 分组查询时统计多个字段
+
+    FOR g IN resource
+    FILTER g.gcId in ["5373281", "4889744"]
+    COLLECT catakey = g.gcId, type = g.resourceType
+    WITH COUNT INTO number
+    RETURN {
+      catakey: catakey,
+      type: type,
+      num: number
+    }
+
+#### 查询某张表中除了在另一张表中存在记录之外的所有记录
+
+    FOR p IN persons
+    FILTER p.key == "15919607"
+    LET b = (FOR d IN bind FILTER d._to == p._id return d)
+    FILTER length(b) == 0
+    RETURN p
 
 ------------------------------------------------------------------------------------------------
 
