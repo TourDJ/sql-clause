@@ -1,6 +1,6 @@
 
 
-|Day     | Meal     | Price   |
+| 查询语句     | Meal     | Price   |
 |:--------|---------:|:-------:|
-| Monday  | pasta    | $6      |
+| Monday  | pasta    | $6  MondayMondayMondayMondayMondayMondayMondayMondayMondayMondayMondayMondayMondayMondayMondayMondayMondayMondayMondayMondayMonday    |
 | Tuesday | chicken  | $8      |
