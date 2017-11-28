@@ -1,5 +1,6 @@
 
 
-| Day     | Meal     | Price   |  
-| -------- | --------- |  
-|查询|mongodb|
+| Day     | Meal     | Price   |
+|:--------|---------:|:-------:|
+| Monday  | pasta    | $6      |
+| Tuesday | chicken  | $8      |
