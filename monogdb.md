@@ -19,7 +19,7 @@
     
 > key：按照key进行分组。    
 > initial：每组都分享的“初始化函数”。可以在此处初始化一些变量，供每组进行使用。   
-> $reduce：该函数有两个参数，第一个参数是当前document对象，第二个参数是上次操作的累计对象。collection中有多少个document就会调用多少次$reduce。
+> $reduce：该函数有两个参数，第一个参数是当前document对象，第二个参数是上次操作的累计对象。collection中有多少个document就会调用多少次$reduce。 
 > condition：过滤条件。   
 > finalize：该函数会在每组document执行完成后，就会调用该函数，可以在这个函数中，做一些后续的工作，比如进行计数操作，统计结果的个数。 
 
