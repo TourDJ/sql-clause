@@ -1,10 +1,33 @@
 
+## MongoDB shell methods
 
-## Mongodb Operators
+#### 分组统计
+> ?
 
-#### Aggregation pileline
+    db.users.group(
+        {
+            key: {sex: 1},
+            reduce: function(curr, result){
+                result.num++;
+            },
+            initial: { num: 0},
+            finalize: function(result) {
+              result.num = parseInt(result.num);
+            }
+        }
+    )
+    
+> key：按照key进行分组。
+> initial：每组都分享的“初始化函数”。可以在此处初始化一些变量，供每组进行使用。
+> $reduce：该函数有两个参数，第一个参数是当前document对象，第二个参数是上次操作的累计对象。collection中有多少个document就会调用多少次$reduce。
+> condition：过滤条件。
+> finalize：该函数会在每组document执行完成后，就会调用该函数，可以在这个函数中，做一些后续的工作，比如进行计数操作，统计结果的个数。
 
-多表联合查询(Multiple collections union query)
+****
+
+## MongoDB Aggregation pileline
+
+#### 多表联合查询(Multiple collections union query)
 > 场景： 三张表（新闻、评论，用户），查询新闻详细内容，同时查出新闻的所有评论及评论的用户信息
 > scenario: three collections(news, comments, users), query news detail, meanwhile need news' all comment and user's info.
 
