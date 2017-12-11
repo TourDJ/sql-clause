@@ -25,9 +25,9 @@
 
 #### 查询指定字段非空
 
-    db.table1.find({name: {$ne: null}})
+    db.news.find({name: {$ne: null}})
 
-#### mongoose 批量更新
+#### 批量更新
 
     db.questions.updateMany({isCommonly: false},  { $set: {reply: 0} })
 
@@ -36,7 +36,7 @@
 ## MongoDB Aggregation pileline
 
 #### 聚合分组统计
-简单分组统计
+> 简单分组统计
 
     db.news.aggregate([
         {
