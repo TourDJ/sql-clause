@@ -2,12 +2,12 @@
 ## MongoDB shell methods
 
 #### 分组统计
-> ?
+> 分组统计，并累加数量
 
     db.users.group(
         {
             key: {sex: 1},
-            reduce: function(curr, result){
+            $reduce: function(curr, result){
                 result.num++;
             },
             initial: { num: 0},
@@ -19,13 +19,59 @@
     
 > key：按照key进行分组。    
 > initial：每组都分享的“初始化函数”。可以在此处初始化一些变量，供每组进行使用。   
-> $reduce：该函数有两个参数，第一个参数是当前document对象，第二个参数是上次操作的累计对象。collection中有多少个document就会调用多少次$reduce。 
+> $reduce：该函数有两个参数，第一个参数是当前document对象，第二个参数是上次操作的累计对象。collection中有多少个document就会调用多少次$reduce。        
 > condition：过滤条件。   
 > finalize：该函数会在每组document执行完成后，就会调用该函数，可以在这个函数中，做一些后续的工作，比如进行计数操作，统计结果的个数。 
+
+#### 查询指定字段非空
+
+    db.table1.find({name: {$ne: null}})
+
+#### mongoose 批量更新
+
+    db.questions.updateMany({isCommonly: false},  { $set: {reply: 0} })
 
 ****
 
 ## MongoDB Aggregation pileline
+
+#### 聚合分组统计
+简单分组统计
+
+    db.news.aggregate([
+        {
+          $group: {
+              _id: "$name",
+              count: {$sum: 1}
+          }
+        },
+        {
+          $match: {count: {"$gt": 1} }
+        }
+    ])
+
+#### 分组统计, 查询条件使用动态生成的正则表达式
+> provs 是查询条件(provs is query condition)
+
+    var rPlace = new RegExp("^(" + provs + ").*")
+
+    db.table1.aggregate([
+        {
+          $match: {field11: rPlace}
+        },
+        {
+          $group: {
+              _id: "$place",
+              count: {$sum: 1}
+          }
+        },
+        {
+          $project: {
+              place: "$_id",
+              num: "$count"
+          } 
+        }
+    ])
 
 #### 多表联合查询(Multiple collections union query)
 > 场景： 三张表（新闻、评论，用户），查询新闻详细内容，同时查出新闻的所有评论及评论的用户信息
