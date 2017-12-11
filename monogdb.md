@@ -153,6 +153,212 @@
     ])
 
 
+#### 多表关联查询后取出关联表的部分字段
+场景：三张表（questions、 users、tags）,查询问题表中指定 id 的记录，并要查出改问题的发布人的信息，该问题的标签信息
+> 使用 $arrayElemAt 可满足此需求
 
+    db.questions.aggregate([
+        {
+            $match: {_id: ObjectId("5a2dd86c5e44de70bfda11af")}
+        },
+        {
+          $lookup: {
+                  from: "users",
+                localField: "userId",
+                foreignField: "_id",
+                as: "users"
+          }
+        },
+        {
+          $lookup: {
+                  from: "tags",
+                localField: "type",
+                foreignField: "_id",
+                as: "tags"
+          }
+        },
+        {
+            $project:
+                {
+                    title: 1,
+                    telphone: 1,
+                    createStr: {
+                        $dateToString: {
+                            format: "%Y-%m-%d %H:%M:%S",
+                            date: {$add: ["$createTime", 8 * 60 * 60000]}
+                        }
+                    },
+                    createTime: 1,
+                    username: 1,
+                    email: 1,
+                    content: 1,
+                    reply: {$size: '$comments'},
+                    viewNum: 1,
+                    collectionNum: 1,
+                    likeNum: 1,
+                    type: 1,
+                    tag: {$arrayElemAt: ['$tags.name', 0]},
+                    icon: {$arrayElemAt: ['$tags.icon', 0]},
+                    status: 1,
+                    isCommonly: {$cond: {if: {$eq: ["$isCommonly", true]}, then: 1, else: 0}},
+                    images: '$images',
+                    _id: 1,
+                    userId: 1,
+                    userName: {$arrayElemAt: ['$users.nickname', 0]},
+                    avatar: {$arrayElemAt: ['$users.avatar', 0]}
+                }
+        }
+    ])
 
+#### 多表中的内嵌属性关联并将内嵌属性展开
+场景：先将 columns 表的 childs 属性展开，展开后取出特定的属性与 children 关联后将查询出的数组属性再展开 
 
+    db.columns.aggregate([
+        {
+            $match:{status: 1, childs: {$exists:true}}
+        },
+        {
+            $unwind: '$childs'
+        },
+        {
+            $project:
+            {
+                childName:'$childs.childName',
+                cid:'$childs._id',
+                childTable:'$childs.childTable',
+                sort:'$childs.sort',
+                _id:1,
+            }
+        },
+        {
+            $lookup:
+            {
+                from: 'children',
+                localField: 'cid',
+                foreignField: 'columnId',
+                as: 'childs'
+            }
+        },
+        {
+            $project:
+            {
+                childName:1,
+                cid:1,
+                childTable:1,
+                sort:1,
+                childs:{$arrayElemAt: [ '$childs', 0 ]}
+            }
+        },
+        {
+            $sort:{sort:1}
+        },
+        {
+            $project:
+            {
+                childName:1,
+                cid:1,
+                childTable:1,
+                sort:1,
+                normalSearch:{
+                    $filter: {
+                        input: '$childs.searchs',
+                        as: 'num',
+                        cond: { $eq: [ '$$num.searchMode', 'normal' ]}
+                    }
+                },
+                highSearch:{
+                    $filter: {
+                        input: '$childs.searchs',
+                        as: 'num',
+                        cond: { $eq: [ '$$num.searchMode', 'high' ]}
+                    }
+                },
+                refTables:'$childs.refTables',
+                detail:'$childs.detail',
+                groupFields:'$childs.groupFields',
+                showDetail:'$childs.showDetail',
+                showMode:'$childs.showMode',
+                hasRef:'$childs.hasRef',
+                showSearch:'$childs.showSearch'
+            }
+        }
+    ])
+
+#### 多表子属性展开关联后再展开结果数据并分组统计后过滤
+场景： 先展开 roles 表的 menus 属性与多表关联，接着展开查询结果并根据 _id 分组统计, 最后过滤排序
+
+    db.roles.aggregate([
+        {
+            $unwind:'$menus'
+        },
+        {
+            $lookup:
+            {
+                from: 'menus',
+                localField: 'menus',
+                foreignField: '_id',
+                as: 'info'
+            }
+        },
+        {
+            $lookup:
+            {
+                from: 'admins',
+                localField: '_id',
+                foreignField: 'roleId',
+                as: 'admin'
+            }
+        },
+        {
+            $match: {_id: ObjectId("596de7822dfc42070ca0f969")}
+        },
+        {
+            $unwind: '$info'
+        },
+        {
+            $group:
+            {
+                _id: '$_id',
+                roleName: {$first: '$name'},
+                list: {
+                    $push: {
+                        name:'$info.name',
+                        icon:'$info.icon',
+                        url:'$info.url',
+                        status:'$info.status',
+                        sort:'$info.sort'
+                    }
+                },
+                admin: {
+                    $first:
+                    {
+                        $filter: {
+                            input: '$admin',
+                            as: 'num',
+                            cond: { $eq: [ '$$num._id', ObjectId("596de7822dfc42070ca0f969")]}
+                        }
+                    }
+                }
+            }
+        },
+        {
+            $project:
+            {
+                roleName: 1,
+                menus: {
+                    $filter: {
+                        input: '$list',
+                        as: 'num',
+                        cond: { $eq: [ '$$num.status', 1 ]}
+                    }
+                },
+                admin: { $arrayElemAt: [ '$admin.username', 0 ]},
+                _id: 0
+            }
+        },
+        {
+            $sort:{
+                sort:1
+            }
+        }
+    ])
