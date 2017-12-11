@@ -37,8 +37,8 @@
 
 #### 聚合分组统计
 > 简单分组统计
-    
-    db.news.aggregate([
+
+    db.news.aggregate([
         {
           $group: {
               _id: "$name",
