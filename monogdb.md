@@ -50,6 +50,99 @@
         }
     ])
 
+#### $map 使用
+
+    db.questions.aggregate([    
+        {
+            $project:
+                {
+                    title: 1,
+                    telphone: 1,
+                    createStr: {
+                        $dateToString: {
+                            format: "%Y-%m-%d %H:%M:%S",
+                            date: {$add: ["$createTime", 8 * 60 * 60000]}
+                        }
+                    },
+                    createTime: 1,
+                    username: 1,
+                    email: 1,
+                    content: 1,
+                    reply: {$size: '$comments'},
+                    viewNum: 1,
+                    collectionNum: 1,
+                    likeNum: 1,
+                    type: 1,
+                    status: 1,
+                    isCommonly: {$cond: {if: {$eq: ["$isCommonly", true]}, then: 1, else: 0}},
+                    comments: {$map:
+                        {
+                            input: "$comments",
+                            as: "comment",
+                            in: {
+                                content: '$$comment.content',
+                                replyuser: '$$comment.replyuser',
+                                replyuserId: '$$comment.replyuserId',
+                                replydate: '$$comment.replydate',
+                                replytime:
+                                    {
+                                        $dateToString: {
+                                            format: "%Y-%m-%d %H:%M:%S",
+                                            date: {$add: ['$$comment.replydate', 8 * 60 * 60000]}
+                                        }
+                                    }
+                            }
+                        }
+                    },
+                    images: '$images',
+                    _id: 1,
+                    userId: 1
+                }
+        },
+        {
+            $match: {status: 0}
+        }
+    ])
+    
+基本多表关联查询
+> $match 放在最后面时需要注意过滤的字段在 $project 中是否显示出来
+
+    db.questions.aggregate([
+        { 
+            $lookup:
+            { 
+                from: 'tags',
+                localField: 'type',
+                foreignField: '_id',
+                as: 'tag' 
+           } 
+        },
+        { 
+            $lookup:
+            { 
+                from: 'collections',
+                localField: '_id',
+                foreignField: 'tid',
+                as: 'collection' 
+            } 
+           },
+        { 
+            $project:
+            { 
+                title: 1,
+                telphone: 1,
+                _id: 1,
+                   userId: 1,
+                   tag: 1,
+                   collection: '0',
+                   status: 1 
+               } 
+          },
+        { 
+            $match: { status: { '$gte': 0 } } 
+        }
+    ])
+
 #### 分组统计, 查询条件使用动态生成的正则表达式
 > provs 是查询条件(provs is query condition)
 
