@@ -50,6 +50,29 @@
         }
     ])
 
+#### 查询排除空字符或空值后分组统计
+
+    db.table1.aggregate([
+        {
+          $match: {$and: [ {name: {$ne: ""}}, {name: {$ne: null}  } ] }
+        },
+        {
+          $group: {
+              _id: "$name",
+              count: {$sum: 1}
+          }
+        },
+        {
+          $sort: {count: -1}
+        },
+        {
+          $project: {
+              name: "$_id",
+              num: "$count"
+          }
+        }
+    ])
+
 #### 分组统计, 根据类型分组统计, 把需要的属性放入数组中
 
     db.tables.aggregate([
