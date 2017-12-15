@@ -50,6 +50,57 @@
         }
     ])
 
+#### 分组统计, 根据类型分组统计, 把需要的属性放入数组中
+
+    db.tables.aggregate([
+        {
+          $lookup:
+            {
+              from: 'fields',
+              localField: '_id',
+              foreignField: 'tableId',
+              as: 'fields'
+            }
+        },
+        {
+          $match:
+            {
+              status: 1
+            }
+        }, 
+        {
+          $project:
+            {
+              _id: 1,
+              type: 1,
+              name: 1,
+              title: 1,
+              field: {
+                $filter: {
+                  input: '$fields',
+                  as: 'num',
+                  cond: {$eq: ['$$num.status', 1]}
+                }
+              }
+            }
+        },
+        {
+          $group:
+            {
+              _id: '$type',
+              title: {
+                $push: {
+                  name: '$name',
+                  title: '$title',
+                  _id: '$_id',
+                  fields: '$field'
+                }
+              }
+            }
+        }
+    ])
+
+
 #### $map 使用
 
     db.questions.aggregate([    
