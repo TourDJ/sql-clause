@@ -46,7 +46,7 @@
             [√] 正式发布 
         </td>
         <td rowspan="7">查询语句</td>
-        <td>文件标识：</td>
+        <td>SQL Server</td>
         <td> </td>
     </tr>
     <tr>
@@ -58,19 +58,19 @@
         <td></td>
     </tr>
     <tr>
-        <td>创建日期：</td>
+        <td>PostgreSQL</td>
         <td></td>
     </tr>
     <tr>
-        <td>最后更新：</td>
+        <td>MongoDB/td>
         <td></td>
     </tr>
     <tr>
-        <td>密    级：</td>
+        <td>ArangoDB</td>
         <td></td>
     </tr>
     <tr>
-        <td>版权说明：</td>
+        <td>Redis</td>
         <td></td>
     </tr>
     </table>  
