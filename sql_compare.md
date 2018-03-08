@@ -1,6 +1,6 @@
 
 
-<table>
+<table style="display:none;">
 <tr>
     <td rowspan="7"> 文件状态：<br/>
         [√] 草稿<br/>
