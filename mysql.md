@@ -7,3 +7,5 @@
 
     show grants for 你的用户
     show grants for root@'localhost';
+
+[MySQL的Grant命令](http://www.cnblogs.com/hcbin/archive/2010/04/23/1718379.html)
