@@ -16,7 +16,9 @@
 修改用户的口令，将用户的口令修改为新的密码               
 
     ALTER USER SCOTT IDENTIFIED BY NEWPASSWORD;
-
+    v5.7
+    ALTER USER 'root'@'localhost' IDENTIFIED BY 'root12345678';
+> MySQL5.7 为了安全，密码设置规则做了改变，详见： [MySQL5.7 修改](http://www.cnblogs.com/ivictor/p/5142809.html)
 
 设置用户口令过期，通过设置用户过期，这样该用户在下次登录的时候就必须要修改密码。
 
