@@ -8,7 +8,24 @@
     show grants for 你的用户
     show grants for root@'localhost';
 
-[MySQL的Grant命令](http://www.cnblogs.com/hcbin/archive/2010/04/23/1718379.html)
+[MySQL的Grant命令](http://www.cnblogs.com/hcbin/archive/2010/04/23/1718379.html)    
+
+
+使用ALTER USER命令可以用来修改用户的口令,设置口令过期,锁定以及解锁用户等等。
+
+修改用户的口令，将用户的口令修改为新的密码               
+
+    ALTER USER SCOTT IDENTIFIED BY NEWPASSWORD;
+
+
+设置用户口令过期，通过设置用户过期，这样该用户在下次登录的时候就必须要修改密码。
+
+    ALTER USER SCOTT PASSWORD EXPIRE;
+
+
+锁定用户，将用户锁定之后，被锁定的用户是不能够再次登录到系统中。
+
+    ALTER USER SCOTT ACCOUNT LOCK;
 
 
 create table t(id int auto_increment not null, c1 int, c2 int, c3 int, primary key(id));
