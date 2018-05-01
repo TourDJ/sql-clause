@@ -47,6 +47,30 @@ create view vw_t as select id, c1, c2, c1+c2 as c3 from t;
 select * from vw_t;
 
 
+## 创建用户并授权(5.7)
+
+#### 创建用户
+CREATE USER 'mysql'@'%' IDENTIFIED BY 'mysql123'; 
+
+#### 授权
+GRANT all ON lenos.* TO 'mysql'@'%';
+
+#### 修改密码
+SET PASSWORD FOR 'root'@'localhost' = PASSWORD('root1234');
+
+## MySQL 变量
+
+#### validate_password_policy  密码验证策略
+|Policy	|Tests Performed|
+|----|--------|
+|0 or LOW	    |Length|
+|1 or MEDIUM	|Length; numeric, lowercase/uppercase, and special characters|
+|2 or STRONG	|Length; numeric, lowercase/uppercase, and special characters; dictionary file|
+默认是1，即MEDIUM，设置的密码必须符合长度，且必须含有数字，小写或大写字母，特殊字符。
+
+
+#### validate_password_length  密码验证长度
+
 
 
 
