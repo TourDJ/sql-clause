@@ -58,6 +58,9 @@ GRANT all ON lenos.* TO 'mysql'@'%';
 #### 修改密码
 SET PASSWORD FOR 'root'@'localhost' = PASSWORD('root1234');
 
+#### 撤销权限
+REVOKE privilege ON databasename.tablename FROM 'username'@'host';
+
 ## MySQL 变量
 
 #### validate_password_policy  密码验证策略
