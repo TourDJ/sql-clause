@@ -1,4 +1,7 @@
 
+## postgreSQL 查询语句
+
+[常用基本操作](http://www.cnblogs.com/kaituorensheng/p/4667160.html#_label9)     
 
 #### 递归查询，显示树型结构数据
 
