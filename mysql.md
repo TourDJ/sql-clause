@@ -74,7 +74,28 @@ REVOKE privilege ON databasename.tablename FROM 'username'@'host';
 
 #### validate_password_length  密码验证长度
 
+#### 创建表时使用编码
+```sql
+CREATE TABLE menu (
+    id int(4) primary key NOT NULL auto_increment,
+    icon varchar(1000),
+    category varchar(100),
+    logo varchar(2000),
+    parent_id int(4)
+    classify int(2),
+    remark varchar(255),
+    create_user int(4),
+    create_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_user int(4),
+    update_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    status int(2) DEFAULT 1,
+)character set utf8
+```
 
+
+#### 更改表的编码
+
+alter table address convert to character set utf8
 
 
 
