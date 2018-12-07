@@ -98,4 +98,7 @@ CREATE TABLE menu (
 alter table address convert to character set utf8
 
 
+在命令行输入：mysqld -nt --skip-grant-tables
+以管理员身份重新启动一个cmd命令窗口，输入：mysql -uroot -p，Enter进入数据库。
+
 
