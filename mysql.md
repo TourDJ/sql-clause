@@ -1,7 +1,13 @@
 
 ## MySQL 常用语句
 
-[MySQL查看当前用户、存储引擎、日志](http://www.cnblogs.com/xiaoit/p/3376596.html)
+### DDL（Data Definition Language）数据库定义语言
+
+
+### DML（Data Manipulation Language）数据操纵语言
+
+
+### DCL（Data Control Language）数据库控制语言
 
 查看MySQL用户权限
 
@@ -9,7 +15,6 @@
     show grants for root@'localhost';
 
 [MySQL的Grant命令](http://www.cnblogs.com/hcbin/archive/2010/04/23/1718379.html)    
-
 
 使用ALTER USER命令可以用来修改用户的口令,设置口令过期,锁定以及解锁用户等等。
 
@@ -28,6 +33,13 @@
 锁定用户，将用户锁定之后，被锁定的用户是不能够再次登录到系统中。
 
     ALTER USER SCOTT ACCOUNT LOCK;
+
+
+
+### TCL（Transaction Control Language）事务控制语言
+
+
+[MySQL查看当前用户、存储引擎、日志](http://www.cnblogs.com/xiaoit/p/3376596.html)
 
 
 create table t(id int auto_increment not null, c1 int, c2 int, c3 int, primary key(id));
