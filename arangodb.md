@@ -1,4 +1,115 @@
 
+## [Arangodb AP](#API)
+> ?
+
+      +-Databases 
+      |---db._name()  
+      |---db._id()  
+      |---db._path()  
+      |---db._isSystem()  
+      |---db._useDatabase(name) 
+      |---db._databases() 
+      |---db._createDatabase(name, options, users)  
+      |---db._dropDatabase(name)  
+      |---db._engineStats() 
+
+      +-Collection  
+      |---+Collection Methods 
+      |   |---collection.drop(options)  
+      |   |---collection.truncate() 
+      |   |---collection.properties() 
+      |   |---collection.figures()
+      |   |---collection.load()
+      |   |---collection.revision()
+      |   |---collection.path()
+      |   |---collection.checksum(withRevisions, withData)
+      |   |---collection.unload()
+      |   |---collection.rename(new-name)
+      |   |---collection.rotate()
+      |---+Database Methods
+      |   |---db._collection(collection-name)
+      |   |---db._create(collection-name)
+      |   |---db._collections()
+      |   |---db.collection-name
+      |   |---db._drop(collection)
+      |   |---db._truncate(collection)
+
+
+      +-Documents
+      |---+Collection Methods
+      |   |---collection.all()
+      |   |---collection.byExample(example)
+      |   |---collection.firstExample(example)
+      |   |---collection.range(attribute, left, right)
+      |   |---collection.closedRange(attribute, left, right)
+      |   |---collection.any()
+      |   |---collection.count()
+      |   |---collection.toArray()
+      |   |---collection.document(object)
+      |	|---collection.exists(object)
+      |   |---collection.documents(keys)
+      |   |---collection.insert(data)
+      |   |---collection.replace(selector, data)
+      |   |---collection.update(selector, data)
+      |   |---collection.remove(selector)
+      |   |---collection.removeByKeys(keys)
+      |   |---collection.removeByExample(example)
+      |   |---collection.replaceByExample(example, newValue)
+      |   |---collection.updateByExample(example, newValue)
+      |   |---collection.type()
+      |   |---collection.iterate(iterator, options)  
+      |   |---db._version()
+      |
+      |---+Edges
+      |	|---edge-collection.edges(vertex)
+      |	|---edge-collection.edges(vertices)
+      |	|---edge-collection.inEdges(vertex)
+      |	|---edge-collection.inEdges(vertices)
+      |	|---edge-collection.outEdges(vertex)
+      |	|---edge-collection.outEdges(vertices)
+      |
+      |---+Database Methods
+      |   |---db._document(object)
+      |   |---db._exists(object)
+      |   |---db._replace(selector, data)
+      |   |---db._update(selector, data)
+      |   |---db._remove(selector)
+
+***
+
+
+## [Arangodb Shell](#Shell)
+
+#### 数据备份/恢复
+
+  恢复单张表
+  
+      arangorestore --server.endpoint tcp://127.0.0.1:8529 --server.database blog 
+      --collection persons --input-directory "d:\backup"
+  
+  恢复整个数据库
+  
+      arangorestore --server.endpoint tcp://127.0.0.1:8529 --server.database blog 
+      --input-directory "d:\backup"  
+
+
+  备份整个数据库
+  
+      arangodump --server.endpoint tcp://127.0.0.1:8529 --server.username root --server.database blog 
+      --output-directory "d:\backup"
+
+#### 数据导入/导出
+
+  数据导入
+
+      arangoimp --server.endpoint tcp://127.0.0.1:8529 --server.username root --server.database blog  
+      --file "d:\data\user.json" --type json --collection user --progress true
+
+#### 数据导出
+
+***
+
+
 ## [Arangodb AQL](#AQL)
   
 > An AQL query must either return a result (indicated by usage of the RETURN keyword) or execute a data-modification operation (indicated by usage of one of the keywords INSERT, UPDATE, REPLACE, REMOVE or UPSERT). The AQL parser will return an error if it detects more than one data-modification operation in the same query or if it cannot figure out if the query is meant to be a data retrieval or a modification operation.
