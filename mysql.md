@@ -260,3 +260,13 @@ alter table address convert to character set utf8
 以管理员身份重新启动一个cmd命令窗口，输入：mysql -uroot -p，Enter进入数据库。
 
 
+
+当一张表中的数据有层级关系时，要更新层级数据：
+update t_area t, t_area t2 set t.parent_name = t2.name where t.parent_id = t2.id;
+而使用以下语句：
+update t_area t set t.parent_name = (select t2.name from t_area t2 where t.parent_id = t2.id);
+会报错：
+ You can't specify target table 't' for update in FROM clause
+
+
+
