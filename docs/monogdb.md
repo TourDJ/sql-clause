@@ -4,7 +4,8 @@
 ## mongodb 安装
 
 * Install any missing dependencies
-#### debian
+
+### debian
 
     sudo apt-get install libcurl3 libgssapi-krb5-2 libkrb5-dbg libldap-2.4-2 libpcap0.8 libpci3 
     libsasl2-2 libsensors4 libsnmp30 libssl1.0.0 libwrap0
@@ -19,9 +20,37 @@
 * Create the data directory and log directory
 
 * Set permissions for the data directory.
+
+### ubuntu
+Install using .tgz Tarball
+
+* Download the MongoDB .tgz tarball.
+* Extract the files from the downloaded archive.
+* Set env.
+
 *** 
-    
-## mongodb shell
+
+## mongodb 配置
+mongodb4 的配置文件使用 YAML 格式。 
+
+
+    systemLog:
+       destination: file
+       path: "/var/log/mongodb/mongod.log"
+       logAppend: true
+    storage:
+       journal:
+          enabled: true
+    processManagement:
+       fork: true
+    net:
+       bindIp: 127.0.0.1
+       port: 27017
+    setParameter:
+       enableLocalhostAuthBypass: false
+    ...
+ 
+## mongodb 使用
 
 #### 启动 mongodb
 > 指定配置文件
