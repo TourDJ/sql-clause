@@ -199,6 +199,8 @@ MongoDB数据库在默认是没有用户名及密码，不用安全验证的，�
     show collections;
 
 
+
+db.grantRolesToUser("myUserAdmin", [ { role: "read", db: "admin" } ])
 ***
 
 ## mongodb 聚合管道
