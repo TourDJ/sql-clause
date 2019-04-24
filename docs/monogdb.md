@@ -95,6 +95,8 @@ mongodb4 的配置文件使用 YAML 格式。
 
 ## mongodb 权限认证
 
+权限相关的概念： [MongoDB认证和授权](https://www.jianshu.com/p/cead54bd1e81)
+
 MongoDB数据库在默认是没有用户名及密码，不用安全验证的，只要连接上服务就可以进行CRUD操作。
 
 #### 开启认证
