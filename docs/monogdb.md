@@ -30,6 +30,22 @@ Install using .tgz Tarball
 
 *** 
 
+## mongodb 卸载
+以 ubuntu 为例，如果是以 apt-get 方式安装：       
+1.停止服务
+
+    sudo service mongod stop (systemV)
+    sudo systemctl stop mongod (systemd)
+
+2.完全清除
+
+    sudo apt-get purge mongodb-org*
+
+3.删除剩余文件
+
+    sudo rm -r /var/log/mongodb
+    sudo rm -r /var/lib/mongodb
+
 ## mongodb 配置
 mongodb4 的配置文件使用 YAML 格式。 
 
