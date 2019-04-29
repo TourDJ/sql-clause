@@ -17,6 +17,8 @@ where EXISTS (
 -- 查询名称不为空的记录
 SELECT * from t_user a WHERE a.name<>'' ;
 
+-- 区分大小写
+SELECT * FROM t_user a WHERE UPPER(a.name) LIKE UPPER('%ml%')
 
 -- 更新语句
 
