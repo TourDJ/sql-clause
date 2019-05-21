@@ -20,6 +20,12 @@ SELECT * from t_user a WHERE a.name<>'' ;
 -- 区分大小写
 SELECT * FROM t_user a WHERE UPPER(a.name) LIKE UPPER('%ml%')
 
+-- 查询包含指定号码的人员
+SELECT * from (
+  SELECT a.id, a."no", a.NAME, a.TYPE, regexp_split_to_array(a."operator", ',') operators from users a 
+) b where '11' = ANY (b.operators)
+
+
 -- 更新语句
 
 -- 更新所有 kind 记录为空的数据
