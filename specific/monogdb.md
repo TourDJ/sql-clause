@@ -112,7 +112,21 @@ MongoDB数据库在默认是没有用户名及密码，不用安全验证的，�
 或者在命令行中加入
 
     mongod --dbpath "D:\mongodb\data\db" --logpath "D:\mongodb\data\log\MongoDB.log" --auth
+    
+mongodb 授权
+mongoDB 默认连接是不需要验证的。通过在配置文件中修改属性开启用户验证。
 
+MongoDB2.x 中：
+
+	vim /etc/mongod.conf
+	auth = true
+
+MongoDB3+ 中：
+
+	vim /etc/mongod.conf
+	security:
+	    authorization：enabled
+        
 #### 用户登陆
 有两种方式进行用户身份的验证。
 * 在客户端连接时指定用户名、密码、db
