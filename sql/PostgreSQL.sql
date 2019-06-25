@@ -1,5 +1,7 @@
 
--- PostgreSQL 查询语句
+-- PostgreSQL 
+
+------------------- 查询语句
 
 -- 查询
 SELECT * from t_user where id='test' and status<>0 ORDER BY id ;
@@ -20,13 +22,30 @@ SELECT * from t_user a WHERE a.name<>'' ;
 -- 区分大小写
 SELECT * FROM t_user a WHERE UPPER(a.name) LIKE UPPER('%ml%')
 
+-- 将逗号分隔字符串转换为数组
 -- 查询包含指定号码的人员
 SELECT * from (
   SELECT a.id, a."no", a.NAME, a.TYPE, regexp_split_to_array(a."operator", ',') operators from users a 
 ) b where '11' = ANY (b.operators)
 
+-- 将逗号分隔字符串转换为表，再关联查询
+-- 例如：查找所有有权限的操作人员才可以编辑数据
+-- operator: 1,4,23,24,26
+SELECT * FROM t_sell M,
+	(
+		SELECT
+			A . ID,
+			regexp_split_to_table(A .operator, ',') AS userId
+		FROM
+			t_sell A
+	) n
+WHERE
+	M ."id" = n. ID
+AND TRIM (n.userId) = #{ userId }
+AND M .status = 1
 
--- 更新语句
+
+------------------- 更新语句
 
 -- 更新所有 kind 记录为空的数据
 UPDATE t_library set kind=1 where kind is NULL ;
