@@ -1,4 +1,4 @@
-<center><h1>ArangoDB 的使用 -- 安装和配置</h1></center>
+<h1>ArangoDB 的使用 -- 安装和配置</h1>
 
 <p><a href="https://www.arangodb.com/why-arangodb/cn/">ArangoDB</a>&nbsp;是一个开源的分布式原生多模型数据库，是兼有图 (graph)、文档 (document)和键/值对 (key/value) 三种数据模型的 NoSQL 数据库。ArangoDB 使用类SQL的查询语言(AQL)构建出高性能应用程序。</p>
 
