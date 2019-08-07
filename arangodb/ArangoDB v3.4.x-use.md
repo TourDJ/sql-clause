@@ -10,9 +10,7 @@ ArangoDB 目前的最新稳定版本是 3.4.x。
 
 根据官方说明得知启动命令为：
 
-<blockquote>
-arangodb --starter.mode single --starter.data-dir /tmp/mydata
-</blockquote>
+    arangodb --starter.mode single --starter.data-dir /tmp/mydata
 
 `data-dir`&nbsp;&nbsp;表示用于存储启动程序生成的所有数据的目录（并保存实际的数据库目录）（默认为当前路径）
 
