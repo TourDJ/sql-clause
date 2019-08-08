@@ -36,7 +36,7 @@ An active failover deployment can be started using
 Please then read the instructions printed on screen for starting the additional servers.
  
 Cluster
-==
+=
  
 A cluster can be started using                                                                                                                            
  
