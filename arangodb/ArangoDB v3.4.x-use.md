@@ -18,7 +18,7 @@ ArangoDB 目前的最新稳定版本是 3.4.x。从版本3.4.0开始，除了安
 
 
 Single Server 
---
+-------------
  
 Use
  
@@ -27,7 +27,7 @@ Use
 where `/tmp/mydata` should point to the directory containing the data. The database itself will be in `/tmp/mydata/single8529/data`.The apps will be stored in `/tmp/mydata/single8529/apps`.
  
 Active Failover
-===============
+---------------
  
 An active failover deployment can be started using
  
@@ -36,7 +36,7 @@ An active failover deployment can be started using
 Please then read the instructions printed on screen for starting the additional servers.
  
 Cluster
-=
+-------
  
 A cluster can be started using                                                                                                                            
  
@@ -47,7 +47,17 @@ Please then read the instructions printed on screen for start
 
 > `data-dir`&nbsp;&nbsp;表示用于存储启动程序生成的所有数据的目录（并保存实际的数据库目录）（默认为当前路径）
 
-### Installation
+### Install distributions
 The ArangoDB starter (arangodb) comes with all current distributions of ArangoDB.
 
-If you want a specific version, download the precompiled binary via the GitHub releases page.
+If you want a specific version, download the precompiled binary via the [GitHub releases page](https://github.com/arangodb-helper/arangodb/releases).
+
+```flow
+st=>start: 开始
+op=>operation: My Operation
+cond=>condition: Yes or No?
+e=>end
+st->op->cond
+cond(yes)->e
+cond(no)->op
+&``
