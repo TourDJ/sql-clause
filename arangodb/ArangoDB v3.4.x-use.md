@@ -1,4 +1,3 @@
-`[TOC]`
 
 # ArangoDB v3.4.x 使用说明
 
@@ -54,19 +53,9 @@ The ArangoDB starter (arangodb) comes with all current distributions of ArangoDB
 
 If you want a specific version, download the precompiled binary via the [GitHub releases page](https://github.com/arangodb-helper/arangodb/releases).
 
-- [ ] **Cmd Markdown 开发**
-    - [ ] 改进 Cmd 渲染算法，使用局部渲染技术提高渲染效率
-    - [ ] 支持以 PDF 格式导出文稿
-    - [x] 新增Todo列表功能 [语法参考](https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments)
-    - [x] 改进 LaTex 功能
-        - [x] 修复 LaTex 公式渲染问题
-        - [x] 新增 LaTex 公式编号功能 [语法参考](http://docs.mathjax.org/en/latest/tex.html#tex-eq-numbers)
-- [ ] **七月旅行准备**
-    - [ ] 准备邮轮上需要携带的物品
-    - [ ] 浏览日本免税店的物品
-    - [x] 购买蓝宝石公主号七月一日的船票
 
-abc[^footnote]
+## 使用链接
+[Starting an ArangoDB cluster or database the easy way](https://www.arangodb.com/docs/3.4/tutorials-starter.html)     
+[Using the ArangoDB Starter](https://www.arangodb.com/docs/3.4/deployment-single-instance-using-the-starter.html)    
 
 
-[^footnote]: 这是一个 *注脚* 的 **文本**。
