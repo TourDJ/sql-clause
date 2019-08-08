@@ -65,3 +65,8 @@ If you want a specific version, download the precompiled binary via the [GitHub 
     - [ ] 准备邮轮上需要携带的物品
     - [ ] 浏览日本免税店的物品
     - [x] 购买蓝宝石公主号七月一日的船票
+
+abc[^footnote]
+
+
+[^footnote]: 这是一个 *注脚* 的 **文本**。
