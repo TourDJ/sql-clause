@@ -1,6 +1,6 @@
-# ArangoDB v3.4.x 使用说明
-
 [TOC]
+
+# ArangoDB v3.4.x 使用说明
 
 ArangoDB 目前的最新稳定版本是 3.4.x。从版本3.4.0开始，除了安装包之外，还可以为`Linux`平台提供 tar.gz 存档。
 
