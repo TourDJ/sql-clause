@@ -1,4 +1,4 @@
-[TOC]
+`[TOC]`
 
 # ArangoDB v3.4.x 使用说明
 
