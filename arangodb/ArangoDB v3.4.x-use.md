@@ -18,7 +18,7 @@ ArangoDB 目前的最新稳定版本是 3.4.x。从版本3.4.0开始，除了安
 
 
 Single Server 
-=============
+--
  
 Use
  
@@ -36,7 +36,7 @@ An active failover deployment can be started using
 Please then read the instructions printed on screen for starting the additional servers.
  
 Cluster
-=======
+==
  
 A cluster can be started using                                                                                                                            
  
@@ -44,4 +44,10 @@ A cluster can be started using
  
 Please then read the instructions printed on screen for start
 
+
 > `data-dir`&nbsp;&nbsp;表示用于存储启动程序生成的所有数据的目录（并保存实际的数据库目录）（默认为当前路径）
+
+### Installation
+The ArangoDB starter (arangodb) comes with all current distributions of ArangoDB.
+
+If you want a specific version, download the precompiled binary via the GitHub releases page.
