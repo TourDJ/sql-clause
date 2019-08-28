@@ -1,8 +1,14 @@
 
-## MySQL 服务器
+- [MySQL 使用常用知识](#mysql)     
+  - [MySQL 服务器](#mysql_server)    
+  -
+	
+## <a id="mysql">MySQL 使用常用知识</a>
+
+### <a id="mysql_server">MySQL 服务器</a>
 
 如果你指定 localhost 作为一个主机名【也就是你在本机上连接本机的mysql服务】， mysqladmin 默认使用Unix套接字文件连接，而不是TCP/IP。
-从MySQL 4.1 开始，通过--protocol= {TCP |SOCKET | PIPE | MEMORY} 选项，你可以显示地指定连接协议，举例如下：
+从MySQL 4.1 开始，通过`--protocol= {TCP |SOCKET | PIPE | MEMORY}` 选项，你可以显示地指定连接协议，举例如下：
 
 socket 连接：
 
@@ -14,7 +20,7 @@ tcp 连接：
 
     [zzz@zzz mysql]$ mysql --protocol=TCP -uroot -p -P3307 -hlocalhost
 
-auth_socket     
+**auth_socket**     
 如果您安装5.7并且没有为root用户提供密码，它将使用auth_socket插件。该插件不关心，也不需要密码。它只检查用户是否使用UNIX套接字进行连接，然后比较用户名。
 ```sql
 mysql> USE mysql;
