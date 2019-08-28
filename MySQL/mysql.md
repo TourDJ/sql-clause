@@ -270,3 +270,48 @@ update t_area t set t.parent_name = (select t2.name from t_area t2 where t.paren
 
 
 
+#### MySQL字符集设置
+– character_set_server：默认的内部操作字符集
+– character_set_client：客户端来源数据使用的字符集
+– character_set_connection：连接层字符集
+– character_set_results：查询结果字符集
+– character_set_database：当前选中数据库的默认字符集
+– character_set_system：系统元数据(字段名等)字符集
+
+查询字符集命令：      
+• SHOW CHARACTER SET;
+• SHOW COLLATION;
+• SHOW VARIABLES LIKE ‘character%’;
+• SHOW VARIABLES LIKE ‘collation%’;
+
+字符集使用注意事项：    
+⑴ 建立数据库/表和进行数据库操作时尽量显式指出使用的字符集，而不是依赖于MySQL的默认设置      
+⑵ my.cnf(my.ini)中的default_character_set设置只影响mysql命令连接服务器时的连接字符集，不会对使用libmysqlclient库的应用程序产生任何作用    
+⑶ 对字段进行的SQL函数操作通常都是以内部操作字符集进行的，不受连接字符集设置的影响      
+
+修改默认字符集      
+(1) 修改mysql的配置文件 my.cnf(my.ini) 文件中的字符集键值
+
+	default-character-set = utf8
+   	character_set_server =  utf8
+修改完后，重启mysql的服务
+
+(2) 使用mysql的命令
+
+     mysql> SET character_set_client = utf8 ;
+     mysql> SET character_set_connection = utf8 ;
+     mysql> SET character_set_database = utf8 ;
+     mysql> SET character_set_results = utf8 ;
+     mysql> SET character_set_server = utf8 ;
+     mysql> SET collation_connection = utf8 ;
+     mysql> SET collation_database = utf8 ;
+     mysql> SET collation_server = utf8 ;
+
+另 `SET NAMES 'utf8';` 相当于下面的三句指令：
+
+	SET character_set_client = utf8;
+	SET character_set_results = utf8;
+	SET character_set_connection = utf8;
+
+
+
