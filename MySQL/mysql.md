@@ -285,7 +285,21 @@ update t_area t set t.parent_name = (select t2.name from t_area t2 where t.paren
 	• SHOW COLLATION;
 	• SHOW VARIABLES LIKE ‘character%’;
 	• SHOW VARIABLES LIKE ‘collation%’;
+例如：
 
+	mysql> show variables like 'character%';
+	+--------------------------+----------------------------------------+
+	| Variable_name            | Value                                  |
+	+--------------------------+----------------------------------------+
+	| character_set_client     | utf8mb4                                |
+	| character_set_connection | utf8mb4                                |
+	| character_set_database   | latin1                                 |
+	| character_set_filesystem | binary                                 |
+	| character_set_results    | utf8mb4                                |
+	| character_set_server     | latin1                                 |
+	| character_set_system     | utf8                                   |
+	| character_sets_dir       | E:\mysql-5.7.24-winx64\share\charsets\ |
+	+--------------------------+----------------------------------------+
 字符集使用注意事项：    
 ⑴ 建立数据库/表和进行数据库操作时尽量显式指出使用的字符集，而不是依赖于MySQL的默认设置      
 ⑵ my.cnf(my.ini)中的default_character_set设置只影响mysql命令连接服务器时的连接字符集，不会对使用libmysqlclient库的应用程序产生任何作用    
