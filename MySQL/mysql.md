@@ -8,8 +8,10 @@
 
 
 ### <a id="mysql_install">MySQL 安装</a>
-『CentOS 7 』  
+
 官网地址：https://dev.mysql.com/downloads/repo/yum/
+
+『***CentOS 7*** 』    
 安装步骤：    
 1. 下载校验。
 ```
