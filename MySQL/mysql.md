@@ -271,18 +271,20 @@ update t_area t set t.parent_name = (select t2.name from t_area t2 where t.paren
 
 
 #### MySQL字符集设置
-– character_set_server：默认的内部操作字符集
-– character_set_client：客户端来源数据使用的字符集
-– character_set_connection：连接层字符集
-– character_set_results：查询结果字符集
-– character_set_database：当前选中数据库的默认字符集
-– character_set_system：系统元数据(字段名等)字符集
+
+	character_set_server：默认的内部操作字符集
+	character_set_client：客户端来源数据使用的字符集
+	character_set_connection：连接层字符集
+	character_set_results：查询结果字符集
+	character_set_database：当前选中数据库的默认字符集
+	character_set_system：系统元数据(字段名等)字符集
 
 查询字符集命令：      
-• SHOW CHARACTER SET;
-• SHOW COLLATION;
-• SHOW VARIABLES LIKE ‘character%’;
-• SHOW VARIABLES LIKE ‘collation%’;
+
+	• SHOW CHARACTER SET;
+	• SHOW COLLATION;
+	• SHOW VARIABLES LIKE ‘character%’;
+	• SHOW VARIABLES LIKE ‘collation%’;
 
 字符集使用注意事项：    
 ⑴ 建立数据库/表和进行数据库操作时尽量显式指出使用的字符集，而不是依赖于MySQL的默认设置      
