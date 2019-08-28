@@ -1,9 +1,91 @@
 
 - [MySQL 使用常用知识](#mysql)     
+  - [MySQL 安装](#mysql_install)      
   - [MySQL 服务器](#mysql_server)    
   -
 	
 ## <a id="mysql">MySQL 使用常用知识</a>
+
+
+### <a id="mysql_install">MySQL 安装</a>
+『CentOS 7 』  
+官网地址：https://dev.mysql.com/downloads/repo/yum/
+安装步骤：    
+1. 下载校验。
+```
+	wget https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm
+	md5sum mysql57-community-release-el7-9.noarch.rpm
+```
+2. 执行安装。
+```
+	sudo rpm -ivh mysql57-community-release-el7-9.noarch.rpm
+	sudo yum install mysql-server
+```
+遇到确认提示直接按 `y`， 接受 GPG key， 允许下载内容。
+
+3. 启动数据库
+```
+	sudo systemctl start mysqld
+	sudo systemctl status mysqld
+```
+看到类似如下信息，表示启动成功。
+
+	Dec 01 19:02:20 centos-512mb-sfo2-02 systemd[1]: Started MySQL Server.
+
+在安装成功后，会给MySQL的 root 帐户生成一个临时密码，保存在 mysqld.log 中，用一下命令查看：
+
+	sudo grep 'temporary password' /var/log/mysqld.log
+输出
+
+	2016-12-01T00:22:31.416107Z 1 [Note] A temporary password is generated for root@localhost: mqRfBU_3Xk>r
+`mqRfBU_3Xk>r` 这个就是临时密码，记住他，后面修改密码会用到。
+
+4. 配置数据库
+```
+	sudo mysql_secure_installation
+```
+系统会提示输入密码，输入后，出现修改密码的提示。
+
+	The existing password for the user account root has expired. Please set a new password.
+
+	New password:
+输入两次新密码即可。
+> 注意： MySQL 5.7 对密码要求 12 个字符以上，并且至少包含一个大写字母，一个小写字母，一个数字和一个特殊字符。
+
+接着，会出现下面的提示：
+
+	Estimated strength of the password: 100
+	Change the password for root ? (Press y|Y for Yes, any other key for No) :
+输入 no 即可。
+
+后面还会弹出几个提示，按 y。
+
+4. 测试数据库
+安装、配置完成后，测试一下是否安装成功。
+
+	mysqladmin -u root -p version
+输出类似下面的内容：
+
+	mysqladmin  Ver 8.42 Distrib 5.7.16, for Linux on x86_64
+	Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+	Oracle is a registered trademark of Oracle Corporation and/or its
+	affiliates. Other names may be trademarks of their respective
+	owners.
+
+	Server version          5.7.16
+	Protocol version        10
+	Connection              Localhost via UNIX socket
+	UNIX socket             /var/lib/mysql/mysql.sock
+	Uptime:                 2 min 17 sec
+
+	Threads: 1  Questions: 6  Slow queries: 0  Opens: 107  Flush tables: 1  Open tables: 100  
+	Queries per second avg: 0.043
+表示安装成功了。
+
+参考资料：     
+[How To Install MySQL on CentOS 7](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-centos-7)
+
 
 ### <a id="mysql_server">MySQL 服务器</a>
 
@@ -43,14 +125,6 @@ mysql> UPDATE user SET plugin='mysql_native_password' WHERE User='root';
 mysql> FLUSH PRIVILEGES;
 mysql> exit;
 ```
-
-***
-
-## MySQL 安装
-CentOS 7  
-参考： [How To Install MySQL on CentOS 7](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-centos-7)
-
-*** 
 
 ## MySQL 函数   
 ### 日期函数
