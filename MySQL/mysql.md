@@ -2,7 +2,8 @@
 - [MySQL 使用常用知识](#mysql)     
   - [MySQL 安装](#mysql_install)      
   - [MySQL 服务器](#mysql_server)    
-  -
+  - [MySQL 函数](#mysql_function)    
+  
 	
 ## <a id="mysql">MySQL 使用常用知识</a>
 
@@ -129,9 +130,9 @@ mysql> FLUSH PRIVILEGES;
 mysql> exit;
 ```
 
-## MySQL 函数   
-### 日期函数
-#### date_add() 为日期增加一个时间间隔
+### <a id="mysql_function">MySQL 函数</a>   
+#### 日期函数
+date_add() 为日期增加一个时间间隔
 
     set @dt = now();
     select date_add(@dt, interval 1 day); -- add 1 day
@@ -145,6 +146,8 @@ mysql> exit;
     select date_add(@dt, interval 1 year);
     select date_add(@dt, interval -1 day); -- sub 1 day
 
+参考资料：      
+[MySQL 内置函数](https://dev.mysql.com/doc/refman/5.6/en/func-op-summary-ref.html)
 
 ## MySQL 变量
 ##### FOREIGN_KEY_CHECKS    
