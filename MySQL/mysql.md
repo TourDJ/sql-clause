@@ -64,8 +64,9 @@
 
 4. 测试数据库       
 安装、配置完成后，测试一下是否安装成功。
-
+```
 	mysqladmin -u root -p version
+```
 输出类似下面的内容：
 
 	mysqladmin  Ver 8.42 Distrib 5.7.16, for Linux on x86_64
