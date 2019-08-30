@@ -149,8 +149,16 @@ date_add() 为日期增加一个时间间隔
 参考资料：      
 [MySQL 内置函数](https://dev.mysql.com/doc/refman/5.6/en/func-op-summary-ref.html)
 
-## MySQL 变量
-##### FOREIGN_KEY_CHECKS    
+### MySQL 变量
+
+查看变量的命令：
+
+	SHOW VARIABLES
+例如：
+
+	show variables like 'log%';
+
+##### FOREIGN_KEY_CHECKS    
 MySQL还原数据库，禁用和启用外键约束的方法(FOREIGN_KEY_CHECKS) 
 禁用
 
