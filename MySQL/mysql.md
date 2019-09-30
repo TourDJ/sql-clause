@@ -92,8 +92,8 @@
 
 『***Windows*** 』   
 ### 在 windows 下安装多个 MySQL
-1）下载 MySQL 5.7.27 并解压
-2）创建 my.ini 文件
+1）下载 MySQL 5.7.27 并解压    
+2）创建 my.ini 文件     
 ```
 	[mysqld]
 	# 设置端口
@@ -128,16 +128,24 @@
 	port=3307
 	default-character-set=utf8
 ```	
-3）创建 data 文件夹
-4）如果是安装多个 MySQL，要先删除相关环境变量
-5）初始化，记录下初始密码
+3）创建 data 文件夹     
+4）如果是安装多个 MySQL，要先删除相关环境变量          
+5）初始化，记录下初始密码   
+```
 	mysqld --initialize --user=mysql --console
-6）安装服务
+```	
+6）安装服务     
+```
 	mysqld –install MySQL57
-7）启动服务
+```	
+7）启动服务     
+```
 	net start MySQL57
-8）登录后，修改初始密码
+```	
+8）登录后，修改初始密码     
+```
 	alter user 'root'@'localhost' identified by '新密码'
+```	
 
 ### <a id="mysql_server">MySQL 服务器</a>
 
