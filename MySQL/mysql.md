@@ -90,6 +90,54 @@
 参考资料：     
 [How To Install MySQL on CentOS 7](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-centos-7)
 
+『***Windows*** 』   
+### 在 windows 下安装多个 MySQL
+1）下载 MySQL 5.7.27 并解压
+2）创建 my.ini 文件
+```
+	[mysqld]
+	# 设置端口
+	port=3307
+
+	# 设置mysql的安装目录(你自己的目录)
+	basedir=D:/mysql-5.7.27-winx64
+
+	# 设置mysql数据库的数据的存放目录
+	datadir=D:/mysql-5.7.27-winx64/data
+
+	# 允许最大连接数
+	max_connections=200
+
+	# 允许连接失败的次数。
+	max_connect_errors=10
+
+	# 服务端使用的字符集默认为UTF8
+	character-set-server=utf8
+
+	server_id=2
+
+	sql_mode='NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'
+	max_allowed_packet = 10M
+
+
+	[mysql]
+	# 设置mysql客户端默认字符集
+	default-character-set=utf8
+
+	[client]
+	port=3307
+	default-character-set=utf8
+```	
+3）创建 data 文件夹
+4）如果是安装多个 MySQL，要先删除相关环境变量
+5）初始化，记录下初始密码
+	mysqld --initialize --user=mysql --console
+6）安装服务
+	mysqld –install MySQL57
+7）启动服务
+	net start MySQL57
+8）登录后，修改初始密码
+	alter user 'root'@'localhost' identified by '新密码'
 
 ### <a id="mysql_server">MySQL 服务器</a>
 
