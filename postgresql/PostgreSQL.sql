@@ -87,3 +87,16 @@ CREATE VIEW view_user as
 SELECT a."id", a."no", a."name", a.role from t_user a
 WHERE a.status=1
 
+					  
+					  
+-- 在PostgreSQL中可以直接对时间进行加减运算：
+
+SELECT now()::timestamp + '1 year';  --当前时间加1年
+SELECT now()::timestamp + '1 month';  --当前时间加一个月
+SELECT now()::timestamp + '1 day';  --当前时间加一天
+SELECT now()::timestamp + '1 hour';  --当前时间加一个小时
+SELECT now()::timestamp + '1 min';  --当前时间加一分钟
+SELECT now()::timestamp + '1 sec';  --加一秒钟
+select now()::timestamp + '1 year 1 month 1 day 1 hour 1 min 1 sec';  --加1年1月1天1时1分1秒
+SELECT now()::timestamp + (col || ' day')::interval FROM table; --把col字段转换成天 然后相加
+
